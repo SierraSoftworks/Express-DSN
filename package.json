@@ -1,0 +1,26 @@
+{
+	"name": "express-dsn",
+	"version": "1.0.0",
+	"author": "Benjamin Pannell <admin@sierrasoftworks.com>",
+	"description": "A custom notification handler designed for Express",
+	"homepage": "https://sierrasoftworks.com/dsn",
+	"repository": "https://github.com/sierrasoftworks/express-dsn",
+	"contributors": [
+		{ "name": "Benjamin Pannell", "email": "admin@sierrasoftworks.com" }
+	],
+	"licence": "MIT",
+
+	"main": "./index",
+	"scripts": {
+		
+	},
+	
+	"engines": {
+		"node": ">= 0.8"
+	},
+	"dependencies": {
+
+	},
+	"devDependencies": {
+	}
+}
