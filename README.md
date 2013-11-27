@@ -8,6 +8,17 @@
 
 You're a web developer, you love Node and Express, you wish there was an easy way to display notifications to your users that worked through redirects. We're here to help!
 
+## Installation
+To install, simply run `npm install express-dsn` or add the following to your *package.json* file.
+
+```json
+{
+	"dependencies": {
+		"express-dsn": "1.x"
+	}
+}
+```
+
 ## Example
 ```javascript
 var express = require('express'),
