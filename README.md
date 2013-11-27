@@ -32,7 +32,7 @@ app.get('/view', function(req, res) {
 	res.json(200, res.locals.notifications);
 });
 
-app.post('/message', function(req, res) {
+app.get('/message', function(req, res) {
 	res.notify({ title: 'My Title', content: "My message content goes here...", type: 'alert' });
 	res.redirect('/view');
 });
