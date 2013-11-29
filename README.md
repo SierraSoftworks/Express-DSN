@@ -63,6 +63,17 @@ dsn.clear(res);
 dsn.options.cookie = 'dsn';
 dsn.options.property = 'notifications';
 
+dsn.options.hook = {
+	store: {
+		redirect: true,
+		location: true
+	},
+	clear: {
+		render: true,
+		json: true
+	}
+};
+
 app.get('/', function(req, res) {
 	res.notify(notification);
 	res.clearNotifications();

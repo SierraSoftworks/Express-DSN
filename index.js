@@ -2,7 +2,18 @@ var dsn = (require.modules || {}).dsn = module.exports = {};
 
 dsn.options = {
 	cookie: 'dsn',
-	property: 'notifications'
+
+	property: 'notifications',
+	hook: {
+		store: {
+			redirect: true,
+			location: true
+		},
+		clear: {
+			render: true,
+			json: true
+		}
+	}
 };
 
 dsn.extend = function(app) {
@@ -17,35 +28,6 @@ dsn.extend = function(app) {
 		next();
 	});
 };
-
-function extendResponse(response) {
-	response.notify = function(notification) {
-		/// <summary>Adds a notification to be displayed to the client</summary>
-		/// <param name="notification" type="Object">The notification you wish to display to the user</param>
-		return dsn.notify(response, notification);
-	};
-
-	response.clearNotifications = function() {
-		/// <summary>Removes any active notifications from the current response object</summary>
-		response.locals[dns.options.property] = null;
-		response.clearCookie(dns.options.cookie);
-	};
-
-	var redirect = response.redirect;
-	var render = response.render;
-
-	response.redirect = function() {
-		if(response.locals[dsn.options.property])
-			response.cookie(dsn.options.cookie, response.locals[dsn.options.property]);
-		return redirect.apply(this, arguments);
-	};
-
-	response.render = function() {
-		if(response.locals[dsn.options.property])
-			response.clearCookie(dsn.options.cookie);
-		return render.apply(this, arguments);
-	};
-}
 
 dsn.notify = function(res, notification) {
 	/// <summary>Adds a notification to be displayed to the client</summary>
@@ -63,3 +45,48 @@ dsn.clear = function(response) {
 	response.locals[dns.options.property] = null;
 	response.clearCookie(dns.options.cookie);
 };
+
+
+function extendResponse(response) {
+	response.notify = function(notification) {
+		/// <summary>Adds a notification to be displayed to the client</summary>
+		/// <param name="notification" type="Object">The notification you wish to display to the user</param>
+		return dsn.notify(response, notification);
+	};
+
+	response.clearNotifications = function() {
+		/// <summary>Removes any active notifications from the current response object</summary>
+		response.locals[dns.options.property] = null;
+		response.clearCookie(dns.options.cookie);
+	};
+
+	function hookStore(property) {
+		(function(property) {
+			var original = response[property];
+			response[property] = function() {
+				if(response.locals[dsn.options.property])
+					response.cookie(dsn.options.cookie, response.locals[dsn.options.property]);
+				return original.apply(this, arguments);
+			};
+		})(property);
+	}
+
+	function hookClear(property) {
+		(function(property) {
+			var original = response[property];
+			response[property] = function() {
+				if(response.locals[dsn.options.property])
+					response.clearCookie(dsn.options.cookie);
+				return original.apply(this, arguments);
+			};
+		})(property);
+	}
+
+	for(var k in dsn.options.hook.store) {
+		if(dsn.options.hook.store[k]) hookStore(k);
+	}
+
+	for(var k in dsn.options.hook.clear) {
+		if(dsn.options.hook.clear) hookClear(k);
+	}
+}
