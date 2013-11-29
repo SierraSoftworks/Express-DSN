@@ -1,0 +1,9 @@
+!!!
+html
+	body
+		if notifications
+			div#notifications
+				-each notification in notifications
+					div(class='notification notification-#{notification.type}')
+						h4.notification-title= notification.title
+						p.notification-body= notification.content

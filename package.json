@@ -1,6 +1,6 @@
 {
 	"name": "express-dsn",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"author": "Benjamin Pannell <admin@sierrasoftworks.com>",
 	"description": "A custom notification handler designed for Express",
 	"homepage": "https://sierrasoftworks.com/dsn",
@@ -12,7 +12,7 @@
 
 	"main": "./index",
 	"scripts": {
-		
+		"test": "mocha"
 	},
 	
 	"engines": {
@@ -22,5 +22,10 @@
 
 	},
 	"devDependencies": {
+		"mocha": "*",
+		"should": "*",
+		"supertest": "*",
+		"express": "3.x",
+		"jade": "*"
 	}
 }
