@@ -2,6 +2,7 @@
 **A robust notification framework extension for Express**
 
 [![](https://badge.fury.io/js/express-dsn.png)](https://npmjs.org/package/express-dsn)
+[![Build Status](https://travis-ci.org/SierraSoftworks/Express-DSN.png?branch=master)](https://travis-ci.org/SierraSoftworks/Express-DSN)
 <script id='fbj54eo'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=SierraSoftworks&button=compact&url=https%3A%2F%2Fsierrasoftworks.com%2Fdsn';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbj54eo');</script>
 
 You're a web developer, you love Node and Express, you wish there was an easy way to display notifications to your users that worked through redirects. We're here to help!
